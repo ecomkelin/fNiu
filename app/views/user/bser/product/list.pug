@@ -1,0 +1,61 @@
+extends ../aalayout/layout
+
+block content
+	.noprint(style="height:59px")
+	#ajaxPds_page.page.container.mt-3(style="display:none")
+	#bsPdfirs_page.page.container.mt-3
+
+		.row.my-3
+			.col-12.text-right
+				a.btn.btn-warning(href="/bsPdfirAdd") <span class="oi oi-plus"></span>
+		- let i = 0;
+		each pdfir in pdfirs
+			- i++;
+			if i == 50
+				-break;
+			.card.mt-3.p-2.bsPdfirs_pdfir(id="bsPdfirs_pdfir-"+pdfir._id)
+				.row
+					.col-4.border-right
+						.row.text-center.pl-3
+							.col-12 N.#{i}
+							img.card-img.ml-1(src=pdfir.photo, width="100%", style="max-width: 90px; max-height: 120px")
+					.col-8
+						.row
+							if pdfir.rcmd == 1
+								-a;
+								h4.col-6.text-left.text-info #{pdfir.code}
+							else
+								h4.col-6.text-left #{pdfir.code}
+							h5.col-6.text-right #{pdfir.nome}
+
+							.col-5.text-right 售价:
+							.col-7.text-left #{pdfir.price}
+							.col-5.text-right 销量:
+							.col-7.text-left #{pdfir.sales}
+							.col-5.text-right 库存:
+							.col-7.text-left #{pdfir.stock}
+		.bomNav-first.bg-info.js-scroll-DwShowUpHide(style="display:none")
+			.row.pt-2
+				.col-7
+					select#sortSelect.selectPd.custom-select.custom-select-md.mb-3
+						option(value='upAt_-1') 最近使用
+						option(value='upAt_1') 不常使用
+						option(value='ctAt_-1') 最新创建
+						option(value='ctAt_1') 最久创建
+						option(value='stock_-1') 库存最多
+						option(value='stock_1') 库存最少
+						option(value='sales_-1') 销量最多
+						option(value='sales_1') 销量最少
+				.col-5
+					select#isSel.selectPd.custom-select.custom-select-md.mb-3
+						option(value='all_-1') 全部选择
+						option(value='isPhoto_0') 无图片
+						option(value='isPhoto_1') 有图片
+						option(value='isRcmd_1') 推荐产品
+						option(value='isRcmd_0') 未推荐
+	.topNav-second.bg-info#pdCodeNav.p-2
+		.row
+			.col-12
+				input#pdCodeAjax.form-control(type="text", autocomplete="off")
+
+	script(src="/js/bser/pdfir/pdfirs.js")

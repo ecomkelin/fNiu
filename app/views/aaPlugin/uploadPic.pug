@@ -1,0 +1,12 @@
+img.js-click-imgEnlarge.jsImg(id="jsImg-"+field+"-"+object._id, src=object[field], width="100px")
+.jsChangeImgDiv.text-info(id="jsChangeImgDiv-"+field+"-"+object._id) [点击 上传]
+form.jsFileForm(id="jsFileForm-"+field+"-"+object._id, method="post", action=postUrl, enctype="multipart/form-data", style="display:none")
+	input(type="hidden", name="obj[_id]", value=object._id)
+	input(type="hidden", name="obj[orgFile]", value=object[field])
+	input(type="hidden", name="key", value=field)
+	input(type="hidden", name="fileDir", value=fileDir)
+	input(type="hidden", name="suffixs", value="jpg,jpeg,png,gif")
+	input.jsFileIpt.btn.btn-info.btn-block(id="jsFileIpt-"+field+"-"+object._id, type="file", name="fileUpload" style="display:none")
+	.form-group
+		button.border.border-danger.mr-4.btn.btn-default.text-danger.jsImgCancel(data-objid=object._id, data-field=field type="button") 取消
+		input.btn.btn-success(type="submit", value="确认")

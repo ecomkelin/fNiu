@@ -1,0 +1,71 @@
+extends ../aalayout/layout
+
+block content
+	.container.mt-3
+		form.mt-3#bsProdNew(method="post", action="/bsPdfirNew", enctype="multipart/form-data")
+			input(type="hidden", name="obj[photoDir]", value=Conf.photoPath.proPhoto)
+			input#objId(type="hidden", name="objId")
+			.row
+				.col-12(align="center")
+					img.js-click-imgEnlarge#imgShow-uploadPhoto-id(src="/imgs/createPicture.jpg", width="200px")
+					.js-click-imgChange#imgClk-uploadPhoto-id.text-info <span class="oi oi-pencil"></span>[点击]
+					input.js-ipt-imgFile#imgIpt-uploadPhoto-id.btn.btn-info.btn-block(type="file", name="uploadPhoto", style="display:none")
+			.form-group.row
+				label.col-4.col-form-label(for="iptCode") 编号
+				.col-8
+					input#iptCode.form-control(type="text", name="obj[code]", autocomplete="off")
+				.col-4
+				.col-8
+					span#optCode(style="display:none").text-danger
+			.form-group.row
+				label.col-4.col-form-label(for="iptNome") 名字
+				.col-8
+					input#iptNome.form-control(type="text", name="obj[nome]", autocomplete="off")
+				.col-12
+					.row#nomeShow
+			.form-group.row
+				label.col-4.col-form-label(for="iptMaterial") 材料
+				.col-8
+					input#iptMaterial.form-control(type="text", name="obj[material]", autocomplete="off")
+			.form-group.row
+				label.col-4.col-form-label(for="iptPrice") 价格
+				.col-8
+					input#iptPrice.form-control(type="text", name="obj[price]", placeholder='必填', autocomplete="off")
+				.col-4
+				.col-8
+					span#optPrice(style="display:none").text-danger 必须是数字
+			.form-group.row
+				label.col-4.col-form-label(for="iptCost") 采购价
+				.col-8
+					input#iptCost.form-control(type="text", name="obj[cost]", placeholder='必须是数字', autocomplete="off", value=0)
+				.col-4
+				.col-8
+					span#optCost(style="display:none").text-danger 必须是数字
+			.form-group.row#rowStock
+				label.col-4.col-form-label(for="iptStock") 库存
+				.col-8
+					input#iptStock.form-control(type="number", name="obj[stock]", value=0, autocomplete="off")
+				.col-4
+				.col-8
+					span#optStock(style="display:none").text-danger 必须是数字
+			.form-group.row#rowStockPlus(style="display:none")
+				label.col-4.col-form-label 现有库存
+				label.col-8.col-form-label#nowStock
+				label.col-4.col-form-label(for="iptStock") 采购量
+				.col-8
+					input#iptStockPlus.form-control(type="number", name="obj[stockPlus]", value=0, autocomplete="off")
+				.col-4
+				.col-8
+					span#optStockPlus(style="display:none").text-danger 必须是数字
+			hr
+			.form-group.row
+				label.col-4.col-form-label(for="iptRcmd") 推荐
+				.col-8
+					select.form-control(name="obj[rcmd]", data-style="btn-info")
+						option(value=1) 推荐
+						option(value=0) 不推荐
+			.form-group.row
+				.col-sm-6
+				.col-sm-6.col-12
+					input#btnSubmit.btn.btn-info.btn-block(type="submit" value='提交')
+	script(src="/js/bser/pdfir/add.js")

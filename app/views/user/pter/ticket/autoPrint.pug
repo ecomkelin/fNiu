@@ -1,0 +1,80 @@
+extends ../aalayout/layout
+
+block content
+	.containerTik460.mt-3: strong
+		.noprint
+			input#ticketing(type="hidden", value=order.ticketing)
+			input#id(type="hidden", value=order._id)
+		.row.text-center(style="font-size: 35px; border-bottom: 2px solid #000;")
+			.col-sm-12 #{firm.nome}
+		.row.text-center
+			.col-sm-12(style="font-size: 20px;") Tel: #{firm.tel}
+		div(style="height: 200px")
+		.row(style="font-size: 20px; border: 2px solid #000;")
+			.col-6
+				- let cterCp = new Object();
+				if order.cter
+					- cterCp = order.cter;
+				span Client: #{cterCp.nome}
+			.col-6.text-right
+				span 电话: #{cterCp.tel}
+			div(style="height: 200px")
+		.row.mt-3(style="font-size: 20px; border-bottom: 2px solid #000;")
+			.col-5(style="font-size:16px") Date: #{moment(order.ctAt).format('DD/MM/YYYY')}
+			.col-7.text-right
+				h5: strong No: #{order.code}
+		-var proLen = order.ordfirs.length;
+		-var proNum = 0;
+		.row.mt-4(style="font-size:25px")
+			.col-6 Codice Nome
+			.col-4 Pz x Pr.
+			.col-2 Tot
+		each ordfir in order.ordfirs
+			-proNum += ordfir.quot;
+			.row.mt-2(style="font-size:24px;  border-bottom: 2px solid #000;")
+				if ordfir.pdfir
+					- pdfir = ordfir.pdfir;
+					- let nome = pdfir.nome;
+					if nome.length > 8
+						- nome = nome.slice(0,6) + '...';
+					.col-6 #{pdfir.code} &nbsp; #{nome}
+				else
+					.col-6 产品被删除
+				-let pdPrice = 'NaN';
+				if ordfir.price && !isNaN(ordfir.price)
+					- pdPrice = (ordfir.price).toFixed(2);
+				.col-4.text-right
+					span #{ordfir.quot}
+					span.text-white .
+					span x
+					span.text-white .
+					span #{pdPrice}€
+				.col-2.text-right #{ordfir.quot * pdPrice}€
+		//- .row(style="height: 5px; border-bottom: 1px solid #000;") .
+		.row.mt-3(style="font-size:24px")
+			.col-4 T.Art: #{proLen}
+			.col-5 Tot: #{proNum} pz
+
+		.row(style="font-size: 28px; border: 1px solid #000;")
+			if order.imp != order.pdPr
+				-let pdPr = 'NaN';
+				if order.pdPr && !isNaN(order.pdPr)
+					-pdPr = (order.pdPr).toFixed(2);
+				else if order.imp && !isNaN(order.imp)
+					-pdPr = (order.imp).toFixed(2);
+				.col-6 IMP:
+				.col-6.text-right #{pdPr} €
+			//- if order.real != order.pdPr
+			//- 	-let real = 'NaN';
+			//- 	if order.real && !isNaN(order.real)
+			//- 		-real = (order.real).toFixed(2);
+			//- 	.col-6 ORIGINALE:
+			//- 	.col-6.text-right #{real} €
+			-let imp = 'NaN';
+			if order.imp && !isNaN(order.imp)
+				-imp = (order.imp).toFixed(2);
+			.col-7 Total da pagare:
+			.col-5.text-right #{imp} €
+	div(style="height: 200px")
+	span .
+	script(src="/js/pter/ticket.js")

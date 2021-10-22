@@ -1,0 +1,11 @@
+.topNav-first.bg-dark.p-2.noprint
+	.row
+		.col-3
+			a.navbar-brand.btn.btn-success(href="/bser") <span class="oi oi-home"></span>
+		.col-6.text-right.text-white
+			- let nome = crUser.nome;
+			if !nome || nome.length == 0
+				- nome = crUser.code;
+			span.navbar-brand 你好, <strong>#{nome}</strong>
+		.col-3.text-left
+			a.navbar-brand.btn.btn-info(href="/order") <span class="oi oi-data-transfer-upload"></span>

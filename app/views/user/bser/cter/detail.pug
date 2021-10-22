@@ -1,0 +1,150 @@
+extends ../aalayout/layout
+
+block content
+	input#cterId(type="hidden", value=cter._id)
+	.container.mt-3
+		#basic_elem.page(style="display:none")
+			.row.my-3
+				.col-3
+					a.btn.btn-info(href="/bsCters") <span class="oi oi-arrow-thick-left"></span>
+				.col-3
+					a.btn.btn-danger(href="/bsCterDel/"+cter._id) 删除
+				.col-3.text-right
+					button.btn.btn-warning#upLoginBtn(type="button") <span class="oi oi-key"></span>
+				.col-3.text-right
+					button.btn.btn-warning#upBtn(type="button") <span class="oi oi-pencil"></span>
+
+			table.table.table-bordered.my-3
+				tr
+					td 帐号
+					td #{cter.code}
+				tr
+					td 名称
+					td #{cter.nome}
+				tr
+					td VIP
+					td #{cter.vip}
+				tr
+					td 电话
+					td #{cter.tel}
+				tr
+					td IVA
+					td #{cter.iva}
+				tr
+					td C.F.
+					td #{cter.cf}
+				tr
+					td 地址
+					td #{cter.addr}
+				tr
+					td 邮编
+					td #{cter.post}
+				tr
+					td 城市
+					td #{cter.city}
+
+		#update_elem.page(style="display:none")
+			.row.my-3
+				.col-6
+					button.btn.btn-secondary.cnlBtn(type="button") <span class="oi oi-x"></span>
+				.col-6.text-right
+					button.btn.btn-success#subBtn(type="button") <span class="oi oi-location"></span>
+
+			form.mt-3#bsCterUpdForm
+				input(type="hidden", name="obj[_id]", value=cter._id)
+				.form-group.row
+					label.col-4.col-form-label(for="iptNome") 名字
+					.col-8
+						input#iptNome.form-control(type="text", name="obj[nome]", autocomplete="off", value=cter.nome)
+				.form-group.row
+					label.col-4.col-form-label(for="iptVIP") VIP
+					.col-8
+						input#iptVIP.form-control(type="text", name="obj[vip]", autocomplete="off", value=cter.vip)
+				.form-group.row
+					label.col-4.col-form-label(for="iptTel") 电话
+					.col-8
+						input#iptTel.form-control(type="text", name="obj[tel]", autocomplete="off", value=cter.tel)
+				.form-group.row
+					label.col-4.col-form-label(for="iptIva") IVA
+					.col-8
+						input#iptIva.form-control(type="text", name="obj[iva]", autocomplete="off", value=cter.iva)
+				.form-group.row
+					label.col-4.col-form-label(for="iptCF") C.F.
+					.col-8
+						input#iptCF.form-control(type="text", name="obj[cf]", autocomplete="off", value=cter.cf)
+				.form-group.row
+					label.col-4.col-form-label(for="iptAddr") 地址
+					.col-8
+						input#iptAddr.form-control(type="text", name="obj[addr]", autocomplete="off", value=cter.addr)
+				.form-group.row
+					label.col-4.col-form-label(for="iptPost") 邮编
+					.col-8
+						input#iptPost.form-control(type="text", name="obj[post]", autocomplete="off", value=cter.post)
+				.form-group.row
+					label.col-4.col-form-label(for="iptCity") 城市
+					.col-8
+						input#iptCity.form-control(type="text", name="obj[city]", autocomplete="off", value=cter.city)
+		#updLogin_elem.page(style="display:none")
+			.row.my-3
+				.col-6
+					button.btn.btn-secondary.cnlBtn(type="button") <span class="oi oi-x"></span>
+				.col-6.text-right
+					button.btn.btn-success#subLoginBtn(type="button") <span class="oi oi-location"></span>
+
+			form.mt-3#bsCterLoginForm
+				input(type="hidden", name="obj[_id]", value=cter._id)
+				.form-group.row
+					label.col-4.col-form-label(for="iptCode") 帐号
+					.col-8
+						input#iptCode.form-control(type="text", name="obj[code]", autocomplete="off", value=cter.code)
+				.form-group.row
+					label.col-4.col-form-label(for="iptPwd") 密码
+					.col-8
+						input#iptPwd.form-control(type="text", name="obj[pwd]", autocomplete="off")
+				.form-group.row
+					label.col-4.col-form-label(for="iptCode") 帐号
+					.col-8
+						select.form-control(name="obj[canLogin]", data-style="btn-info")
+							if cter.canLogin == 1
+								-a;
+								option(value=1) 可以登录
+								option(value=0) 禁止登录
+							else
+								option(value=0) 禁止登录
+								option(value=1) 可以登录
+		#ordfirs_elem.page
+			#ordfirsAjax_div
+			div(style="height:400px")
+			.bomNav-second.js-scroll-DwHideUpShow.bg-light
+				.row
+					.col-6
+						input.form-control#pdCode(type="text")
+					.col-6
+						select#ordfirTime.custom-select.custom-select-md.mb-3
+							option(value=-1) 全部
+							option(value="year") 今年
+							option(value="quarter") 本季度
+							option(value="month") 本月
+							option(value="week") 本周
+							option(value=0) 自定义
+			#customizeOrdfirNav(style="display:none")
+				.bomNav-third.bg-light.js-scroll-DwHideUpShow.py-2
+					.row
+						.col-6
+							input.form-control(type="text")
+						.col-6
+							input.form-control(type="text")
+		#cterPdfir_elem.page(style="display:none")
+			#pdAjaxCter_div
+
+		.bomNav-first.bg-light
+			.row
+				.col-4
+					button#ordfirs_btn.bomBtn.btn.btn-info.btn-lg.btn-block(type="button") 销售
+				.col-4
+					button#ctPdfirs_btn.bomBtn.btn.btn-secondary.btn-lg.btn-block(type="button") 整理
+				.col-4
+					button#basic_btn.bomBtn.btn.btn-secondary.btn-lg.btn-block(type="button") 信息
+
+	script(src="/js/bser/cter/cter.js")
+	script(src="/js/bser/cter/update.js")

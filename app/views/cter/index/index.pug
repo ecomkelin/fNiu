@@ -1,0 +1,43 @@
+extends ../aalayout/layout
+
+block content
+	.bigImgBox(style="display:none")
+	//- img.bgImg(src=firm.posts[0].photo width="100%")
+	//- .bgSpace.text-center(style="height: 200px")
+	.containerPage
+		#carouselExampleIndicators.carousel.slide(data-ride="carousel")
+			.carousel-inner
+				- var i = 0;
+				each post in firm.posts
+					- i++;
+					- active = '';
+					if i == 1
+						- active = 'active';
+					.carousel-item(class=active)
+						img.d-block.w-100(src=post.photo)
+						.carousel-caption.d-none.d-md-block
+							h5 #{post.title}
+							p #{post.desp}
+			a.carousel-control-prev(href="#carouselExampleIndicators" role="button" data-slide="prev")
+				span.carousel-control-prev-icon(aria-hidden="true")
+				span.sr-only Previous
+			a.carousel-control-next(href="#carouselExampleIndicators" role="button" data-slide="next")
+				span.carousel-control-next-icon(aria-hidden="true")
+				span.sr-only Next
+		.bg-light
+			.container
+				.row.mt-5
+					.col-md-12.text-center
+						h1 店长推荐
+					.pdfirsList.bg-light.p-5
+						input#crCter(type="hidden", value=crCter)
+						input#ifload(type="hidden", value="loadno")
+						input#pdfirFilterAjax(type="hidden", value="/usPdfirsAjax?rcmd=1&pagesize=20@#pdfirsElem@ct")
+						//- input#pdfirFilterAjax(type="hidden", value="?key=xxx@#pdfirsElem")
+						#pdfirsElem
+				.row.mt-5
+					.col-12.col-md-4
+					.col-12.col-md-4
+						a.btn.btn-default.btn-block(href="/products") 所有产品
+	script(src="/js/ajaxGet/pdfir.js")
+	script(src="/js/cter/pdfir/list.js")

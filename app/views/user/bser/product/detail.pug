@@ -1,0 +1,32 @@
+extends ../aalayout/layout
+
+block content
+	input#pdfirId(type="hidden", value=pdfir._id)
+	.container.mt-3
+		#basic_elem.page(style="display:none")
+			include ./detail/basic
+
+		#update_elem.page(style="display:none")
+			include ./detail/update
+
+		#pdAjax_elem.page
+			include ./detail/sale
+			
+		#pdAjaxCter_elem.page(style="display:none")
+			#pdAjaxCter_div
+			button#sale_btn.btn.btn-success.btn-lg.btn-block(type="button") 记录
+			div(style="height:400px")
+
+		#cz_elem.page(style="display:none")
+			include ./detail/colorsize
+
+		.bomNav-first.bg-light
+			.row
+				.col-4
+					button#sales_btn.bomBtn.btn.btn-info.btn-lg.btn-block(type="button") 记录
+				.col-4
+					button#cz_btn.bomBtn.btn.btn-secondary.btn-lg.btn-block(type="button") 颜色尺寸
+				.col-4
+					button#basic_btn.bomBtn.btn.btn-secondary.btn-lg.btn-block(type="button") 基本信息
+
+	script(src="/js/bser/pdfir/pdfir.js")

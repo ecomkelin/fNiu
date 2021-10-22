@@ -1,0 +1,22 @@
+#pdAjax_div
+button#ctfirs_btn.btn.btn-success.btn-lg.btn-block(type="button") 整理
+div(style="height:400px")
+.bomNav-second.js-scroll-DwHideUpShow.bg-light
+	.row
+		.col-6
+			select#cterNome.custom-select.custom-select-md.mb-3
+		.col-6
+			select#ordTime.custom-select.custom-select-md.mb-3
+				option(value=-1) 全部
+				option(value="year") 今年
+				option(value="quarter") 本季度
+				option(value="month") 本月
+				option(value="week") 本周
+				option(value=0) 自定义
+#customizeNav(style="display:none")
+	.bomNav-third.bg-light.js-scroll-DwHideUpShow.py-2
+		.row
+			.col-6
+				input.form-control(type="text")
+			.col-6
+				input.form-control(type="text")

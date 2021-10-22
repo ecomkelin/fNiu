@@ -1,0 +1,77 @@
+.container-fluid
+	if firm
+		-a;
+		.js-browserWidth-mb
+			.topNav-first-header.text-center.text-white
+				.row.text-center(style="line-height: 90px;")
+					.col-2
+						a.navb.text-white(href="/products") <span class="oi oi-list"></span>
+					.col-8
+						a.navb.text-white(href="/")
+							span(style="font-size: 25px;") #{firm.nome}
+					.col-2
+						a.navb.text-white(href="/ctMyself") <span class="oi oi-person"></span>
+		.js-browserWidth-pc
+			.topNav-first-header.text-center.text-white
+				.row.text-center(style="line-height: 90px;")
+					.col-md-4
+						.row.mx-5
+							.col-6
+								a.navb#navBrand.text-white(href="/products") 产品
+							.col-6
+								a.navb#navCateg.text-white(href="/pdnomes") 分类
+					.col-md-4
+						a.navb#navHome.text-white(href="/")
+							//- span(style="font-size: 45px;font-family:'Times New Roman';") Xingda &nbsp;
+							span(style="font-size: 35px;") #{firm.nome}
+					.col-md-4
+						.row.mx-5
+							.col-6
+								a.navb#navContact.text-white(href="#") 联系方式
+							.col-6
+								a.navb#navAbout.text-white(href="/ctMyself") 个人中心
+			.topNav-second-header.border-top.navCateg(style="display:none")
+				.row.m-5
+					- var i = 0;
+					each pdnome in proNomes
+						- i++;
+						if i > 30
+							- break;
+						.col-2.mt-3
+							a.text-white(href="/products?keyword="+pdnome.code) #{pdnome.code}
+					
+			.topNav-second-header.border-top.navContact(style="display:none")
+				.row.m-5.text-white
+					.col-md-5
+						h4.tel Tel: #{firm.tel}
+						h4.addr Addr.: #{firm.addr}
+					.col-md-7
+						if firm.posts && firm.posts.length > 0
+							-a;
+							img(src=firm.posts[0].photo, width="100%" height="200px" style="object-fit: scale-down;")
+			.topNav-second-headerHide(style="display:none")
+			//- .row.pt-2.pb-1
+				.col-md-3
+					a(href="/cter"): img(src="/imgs/logo123.jpg", width="100%", title="公司图标")
+				.col-md-6
+					.input-group.input-group-lg
+						input.headPdCode.headWide.form-control(type="text", placeholder='产品搜索', autocomplete="off", aria-label="Large", title="请输入")
+						.input-group-prepend.headSearch#headWide
+							<span class="input-group-text">搜索2</span>
+				.col-md-3.text-right
+					a.btn.btn-success.btn-lg(href="/ctMyself") #{nome}
+			//- .row.pt-4.js-scroll-DwHideUpShow
+				.col-md-9
+					ul.headerUl.catgSpread
+						each proNome in proNomes
+							- bg = 'btn-info';
+							if proNome.code == keyword
+								- bg = 'btn-success';
+							li.catgList(id="b-5"): h5: a.btn(class=bg href="/products?pdnome="+proNome.code) #{proNome.code}
+						li.catgList(id="b-5"): h5: a.btn.btn-primary(href="/pdnomes") 更多
+				.col-md-3.text-right
+					ul.headerUl
+						li: h5 about &nbsp;
+						li: h5 News &nbsp;
+						li: h5 <span class="oi oi-heart"></span>
+						li: h5 <span class="oi oi-heart"></span>

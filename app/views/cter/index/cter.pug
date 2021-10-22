@@ -1,0 +1,33 @@
+extends ../aalayout/layout
+
+block content
+	.container.mt-3
+		.row
+			.col-8.mt-2
+				h4
+					span #{crCter.code}
+					if crCter.nome
+						-a;
+						span [#{crCter.nome}]
+			.col-4.text-right
+				a.btn.btn-danger(href='/logout') 退出
+		.row.mt-4.mb-5.text-center
+			.col-4
+				button.navBtn.btn.btn-info#cart(type="button") 购物车
+			.col-4
+				button.navBtn.btn.btn-default#orders(type="button") 处理订单
+			.col-4
+				button.navBtn.btn.btn-default#basic(type="button") 个人信息
+
+		.cart.navPage
+			include ./self/cart
+		.orders.navPage(style="display:none")
+			input#orcFilterAjax(type="hidden", value="/usOrcsAjax?@#orcsElem@ct")
+			//- input#orcFilterAjax(type="hidden", value="?key=xxx@#orcsElem")
+			#orcsElem
+		.basic.navPage(style="display:none")
+	.js-browserHeight-autoFooter
+	script(src="/js/aaViews/cter.js")
+	script(src="/js/cter/orc/list.js")
+	script(src="/js/ajaxGet/orc.js")
+	

@@ -1,0 +1,10 @@
+extends ../aalayout/layout
+
+block content
+	.container.mt-3
+		input#orcFilterAjax(type="hidden", value="/usOrcsAjax?status=10@#orcsElem@bs")
+		//- input#orcFilterAjax(type="hidden", value="?key=xxx@#orcsElem")
+		#orcsElem
+
+	script(src="/js/cter/orc/list.js")
+	script(src="/js/ajaxGet/orc.js")

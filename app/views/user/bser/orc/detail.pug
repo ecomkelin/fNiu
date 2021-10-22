@@ -1,0 +1,62 @@
+extends ../aalayout/layout
+
+block content
+	.container.mt-4
+		h4.row
+			.col-md-6.mt-3
+				span 订单号: #{orc.code}
+			.col-md-6.mt-3
+				if orc.cter
+					-a;
+					span 客户: #{orc.cter.nome}[#{orc.cter.code}]
+			.col-md-12.mt-3.text-right
+				span 总价:&nbsp;
+				span.text-info #{orc.imp} €
+		hr
+		each orcpd in orc.orcpds
+			-a;
+			if orcpd.pdfir
+				- pdfir = orcpd.pdfir;
+				.row.mt-4.text-center(id="orcpd-"+orcpd._id)
+					.col-4.col-lg-2 
+						div #{pdfir.code} [#{pdfir.nome}]
+						.row
+							.col-6
+								span(id="quotSpan-"+orcpd._id) #{orcpd.quot} pz
+							.col-6
+								- let orcpdprice = parseFloat(orcpd.price * orcpd.quot);
+								if !isNaN(orcpdprice)
+									- orcpdprice = (orcpdprice).toFixed(2);
+									span.text-info(id="totSpan-"+orcpd._id) #{orcpdprice}
+									span &nbsp;€
+								else
+									span.text-danger Err €
+						div
+							img(src=pdfir.photo, width="100%", style="max-width:100px")
+					.col-8.col-lg-10
+						table.table.table-bordered
+							tr
+								td
+								each size in orcpd.sizes
+									-a;
+									td #{size}
+							each color in orcpd.colors
+								- let display = "";
+								if color.cquot == 0
+									- display = "none";
+								tr(style="display:"+display, class="trColor trColor-"+orcpd._id, id="trColor-"+color._id)
+									td(style="background-color:#"+color.colorcode, width="10%")
+										.colornome.bg-light #{color.colornome}
+									each size in color.sizes
+										- a;
+										td
+											if size.quot != 0
+												-a;
+												span #{size.quot}
+		if orc.status == 5
+			-a;
+			.row
+				.col-12.text-right
+					button.btn.btn-success#orcSubBtn(type="button", data-id=orc._id) 发货
+	.js-browserHeight-autoFooter
+	script(src="/js/bser/orc/detail.js")

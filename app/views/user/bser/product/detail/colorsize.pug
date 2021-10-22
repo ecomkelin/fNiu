@@ -1,0 +1,53 @@
+.sizes.text-center
+	.row
+		.col-2
+			button.sAdd.btn.btn-success(type="button", data-size="l") +
+		.col-2
+			button.sDel.btn.btn-danger(type="button",  data-size="l") -
+		.col-4
+			h3 尺寸:
+		.col-2
+			button.sAdd.btn.btn-success(type="button", data-size="r") +
+		.col-2
+			button.sDel.btn.btn-danger(type="button",  data-size="r") -
+
+	.row.sizeElem.mt-4.pb-3.border
+		each size in pdfir.sizes
+			-a;
+			.col-2.mt-3(id="colSize-"+size) #{size}
+
+div(style="height: 100px")
+
+.colorIptBox.text-center
+	h4 产品颜色(已选)
+	.row#coloredsBox
+		each color in pdfir.colors
+			- var colornome = ' ';
+			if color.nome
+				- colornome = color.nome;
+				if colornome.length > 8
+					- colornome = colornome.slice(0,6) + '...';
+			.col-4.col-md-6.col-xl-1.mt-3(id="colored-"+color._id)
+				.colorIpt(style="background-color:#"+color.code+"; height: 30px", data-id=color._id, data-color=color.code, data-nome=color.nome, data-sym=0, title=color.nome)
+				.nome(class="text-success", style="Font-size: 8px", title=color.nome) #{colornome}
+	hr
+	h4 颜色池(未选)
+	.row#colorPoolsBox
+		each color in colors
+			- var flag = 0;
+			each cl in pdfir.colors
+				if String(cl._id) == String(color._id)
+					- flag = 1;
+					- break;
+			if flag == 1
+				- continue;
+			- var colornome = ' ';
+			if color.nome
+				- colornome = color.nome;
+				if colornome.length > 8
+					- colornome = colornome.slice(0,6) + '...';
+			.col-4.col-md-6.col-xl-1.mt-3(id="colorPool-"+color._id)
+				.colorIpt(style="background-color:#"+color.code+"; height: 30px", data-id=color._id, data-color=color.code, data-nome=color.nome, data-sym=1, title=color.nome)
+				.nome(style="Font-size: 8px", title=color.nome) #{colornome}
+
+script(src="/js/bser/pdfir/colorsize.js")

@@ -1,0 +1,81 @@
+.row.my-3
+	.col-6
+		button.btn.btn-secondary.cnlBtn(type="button") <span class="oi oi-x"></span>
+	.col-6.text-right
+		button.btn.btn-success.subBtn(type="button") <span class="oi oi-location"></span>
+
+form.mt-3#bsProdUpdForm(method="post", action="/bsPdfirUpd", enctype="multipart/form-data")
+	input(type="hidden", name="obj[_id]", value=pdfir._id)
+	input(type="hidden", name="obj[orgPhoto]", value=pdfir.photo)
+	input(type="hidden", name="obj[photoDir]", value=Conf.photoPath.proPhoto)
+
+	.row
+		.offset-3.col-6.text-center
+			img.js-click-imgEnlarge#imgShow-uploadPhoto-id(src=pdfir.photo, width="100%")
+			.js-click-imgChange#imgClk-uploadPhoto-id.text-info <span class="oi oi-pencil"></span>[点击]
+			input.js-ipt-imgFile#imgIpt-uploadPhoto-id.btn.btn-info.btn-block(type="file", name="uploadPhoto", style="display:none")
+	hr
+	.form-group.row
+		label.col-4.col-form-label(for="iptCode") 编号
+		.col-8
+			input#iptCode.form-control(type="text", name="obj[code]", autocomplete="off", value=pdfir.code)
+	.form-group.row
+		label.col-4.col-form-label(for="iptNome") 名字
+		.col-8
+			input#iptNome.form-control(type="text", name="obj[nome]", autocomplete="off", value=pdfir.nome)
+	.form-group.row
+		label.col-4.col-form-label(for="iptMaterial") 材料
+		.col-8
+			input#iptMaterial.form-control(type="text", name="obj[material]", autocomplete="off", value=pdfir.material)
+	.form-group.row
+		label.col-4.col-form-label(for="iptPrice") 价格
+		.col-8
+			input#iptPrice.form-control(type="number", name="obj[price]", placeholder='必填', autocomplete="off", value=pdfir.price)
+		.col-4
+		.col-8
+			span#optPrice(style="display:none").text-danger 必须是数字
+	.form-group.row
+		label.col-4.col-form-label(for="iptCost") 采购价
+		.col-8
+			input#iptCost.form-control(type="number", name="obj[cost]", placeholder='必须是数字', autocomplete="off", value=pdfir.cost)
+		.col-4
+		.col-8
+			span#optPriceIn(style="display:none").text-danger 必须是数字
+	.form-group.row
+		label.col-4.col-form-label(for="iptStock", autocomplete="off") 库存
+		.col-8
+			input#iptStock.form-control(type="number", name="obj[stock]", autocomplete="off", value=pdfir.stock)
+		.col-4
+		.col-8
+			span#optAddquot(style="display:none").text-danger 必须是数字
+	.form-group.row
+		label.col-4.col-form-label(for="iptSales", autocomplete="off") 销量
+		.col-8
+			input#iptSales.form-control(type="number", name="obj[sales]", autocomplete="off", value=pdfir.sales)
+		.col-4
+		.col-8
+			span#optAddquot(style="display:none").text-danger 必须是数字
+	hr
+	.form-group.row
+		label.col-4.col-form-label(for="iptRcmd") 推荐
+		.col-8
+			select.form-control(name="obj[rcmd]", data-style="btn-info")
+				if pdfir.rcmd == 1
+					-a;
+					option(value=1) 推荐
+					option(value=0) 不推荐
+				else
+					option(value=0) 不推荐
+					option(value=1) 推荐
+	.form-group.row
+		label.col-4.col-form-label(for="weightIpt") 排序
+		.col-8
+			input#weightIpt.form-control(type="number", name="obj[weight]", autocomplete="off", value=pdfir.weight, placeholder="填写数值越大越越靠前排序")
+	hr
+
+.row.my-3
+	.col-6
+		button.btn.btn-secondary.cnlBtn(type="button") <span class="oi oi-x"></span>
+	.col-6.text-right
+		button.btn.btn-success.subBtn(type="button") <span class="oi oi-location"></span>
+script(src="/js/bser/pdfir/update.js")

@@ -1,0 +1,29 @@
+form#bsOrderAddForm.py-2
+	
+	#ordfirsShow.my-2
+
+	//- .form-group.row
+	//- 	.col-12
+	//- 		textarea#iptNote.form-control(type="text", rows="3", name="obj[note]", placeholder="订单备注")
+
+	#cterPage(style="display:none")
+		.row.my-3
+			.col-3.p-2.text-right
+				h3 客户
+			.col-6
+				input#searchCter.ipt-50-35(type="text", autocomplete="off")
+			.col-3
+				button#cnlCter.btn.btn-secondary.btn-lg(type="button") 散客
+		#bsOrderAdd_cters
+	.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-bottom.noprint
+		.form-group.row
+			input#form_orderId(type="hidden", name="id")
+			input#form_cterIpt(type="hidden", name="obj[cter]")
+			label#selCter-Btn.btn.btn-secondary.col-form-label.col-3 散客
+			label#bsOrderAdd_pz.col-form-label.col-2.text-info 0
+			.col-4
+				input#bsOrderAdd_real.form-control(type="hidden", name="obj[real]", value=0, autocomplete="off")
+				input#bsOrderAdd_pdPr.form-control(type="hidden", name="obj[pdPr]", value=0, autocomplete="off")
+				input#bsOrderAdd_imp.form-control(type="text", name="obj[imp]", value=0, autocomplete="off")
+			.col-3
+				button#bsOrderAdd_btnSub.btn.btn-success.btn-block(type="button") 付款

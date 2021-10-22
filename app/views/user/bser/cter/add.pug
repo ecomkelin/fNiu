@@ -1,0 +1,30 @@
+extends ../aalayout/layout
+
+block content
+	.container.mt-3
+		.row.my-4
+			.col-12
+				h3 添加新的客户:
+		form#newCter_Form(method="post", action="/bsCterNew", enctype="multipart/form-data")
+			.form-group.row
+				label.col-4.col-form-label.text-info(for="iptBsCterAdNome") 名字
+				.col-8
+					input#iptBsCterAdNome.form-control(type="text",name="obj[nome]")
+				.col-4
+				.col-8.text-danger
+					span#optBsCterAddName
+			.form-group.row
+				label.col-4.col-form-label(for="iptBsCterAdVip") VIP
+				.col-8
+					input#iptBsCterAdVip.form-control(type="number", name="obj[vip]", placeholder="用户等级, 默认为0", autocomplete="off")
+			
+			.form-group.row
+				label.col-4.col-form-label(for="iptBsCterAdTel") 电话
+				.col-8
+					input#iptBsCterAdTel.form-control(type="text", name="obj[tel]", autocomplete="off")
+
+			.form-group.row
+				.col-8
+				.col-4
+					input.btn.btn-success.btn-block(type="submit" value="添加")
+	script(src="/js/bser/cter/add.js")

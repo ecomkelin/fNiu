@@ -1,0 +1,79 @@
+extends ../aalayout/layout
+
+block content
+	img.bigImg(src=pdfir.photo width="100%" height="100%", style="display:none")
+	.container.mt-4
+		.row
+			.col-12.text-center
+				.js-browserWidth-pc
+					a(href=pdfir.photo, target="_blank")
+						img(src=pdfir.photo width="100%" height="120px" style="object-fit: scale-down;")
+				.js-browserWidth-mb
+					img.smlImg(src=pdfir.photo width="100%" height="120px" style="object-fit: scale-down;")
+				.row
+					each post in pdfir.posts
+						-a;
+						.col-6.col-md-4.col-xl-2
+							img.js-click-imgEnlarge.jsImg(src=post.photo, width="100%", height="100px")
+				.text-info.text-muted 名称：#{pdfir.nome}
+				.text-info.text-muted 编号：#{pdfir.code}
+				if crCter
+					- let price = pdfir.price;
+					if !isNaN(parseFloat(price))
+						- price = price.toFixed(2);
+					.text-info.text-info 价格：#{price}
+		hr
+		if crCter
+			-a;
+			if orcpd
+				-a;
+				h1.text-center 已加入购物车
+			else 
+				- let colors = [{nome:"Unico Color"}];
+				if pdfir.colors && pdfir.colors.length > 0
+					- colors = pdfir.colors; 
+				- let sizes = ["Unico Size"];
+				if pdfir.sizes && pdfir.sizes.length > 0
+					- sizes = pdfir.sizes; 
+				form#cartForm.mt-5
+					input(type="hidden", name="obj[orc]", value=orc._id)
+					input(type="hidden", name="obj[pdfir]", value=pdfir._id)
+					input#priceIpt(type="hidden", name="obj[price]", value=pdfir.price)
+					table.table.text-center.table-bordered
+						tr
+							td(width="10%")
+							each size in sizes
+								-a;
+								td #{size}
+						- let c = -1;
+						each color in colors
+							- c++;
+							tr
+								td(style="background-color:#"+color.code)
+									span(style="background-color:#FFF") #{color.nome}
+									input(type="hidden", name="obj[colors]["+c+"][colorcode]", value=color.code)
+									input(type="hidden", name="obj[colors]["+c+"][colornome]", value=color.nome)
+								- let s = -1;
+								each size in sizes
+									- s++;
+									td
+										input(type="hidden", name="obj[colors]["+c+"][sizes]["+s+"][size]", value=size)
+										input.iptsty(type="number", name="obj[colors]["+c+"][sizes]["+s+"][quot]", value=0)
+					h3.text-right
+						span 总数: 
+						span.text-info#quotSapn 0
+						input#quotIpt(type="hidden", name="obj[quot]", value=0)
+					hr
+					if crCter
+						-a;
+						.form-group.row
+							.col-md-10.col-sm-6
+							.col-md-2.col-sm-6.col-12
+								button#cartFormSub.btn.btn-success.btn-block(type="button") 加入购物车
+		else
+			h3.mt-5.text-center 登录后创建订单
+			.row.mt-5
+				.col-12.text-center
+					a.btn.btn-success(href="/login") 登录
+		.js-browserHeight-autoFooter
+	script(src="/js/cter/pdfir/detail.js")

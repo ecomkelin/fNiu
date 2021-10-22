@@ -1,0 +1,49 @@
+doctype
+html
+	head
+		title #{title}
+		include ../../aaViews/aalayout/head
+	body
+		.noprint(style="height:60px")
+
+		input#Conf(type="hidden", value=Conf)
+		input#bsMyInfo(type="hidden", value=crUser)
+		#selOrderPage.page
+			h3.reloadPdfirs#loading.text-right 正在加载... <span class="oi oi-reload"></span>
+			h3.reloadPdfirs#loaded.text-right(style="display:none") <span class="oi oi-reload"></span>
+			#matchPdsPage
+			#selPdPage
+			#navIpt.bomNav-first(style="background: #B0C4DE; display:none")
+				.row
+					.col-9.input-group
+						input#headPdCode.ipt-70-40(type="number", placeholder='添加模特', autocomplete="off")
+					.col-3.p-2.text-info: h3#headPdNum 0
+
+		#orderAddPage.page(style="display:none")
+			include ./orderAdd
+
+		#bsOrder_page.page.container.mt-3(style="display:none")
+			
+		#bsOrders_page.page.container.mt-3(style="display:none")
+
+		#bsSelf_page.page.container.mt-3(style="display:none")
+
+		.topNav-first.bg-light
+			.row.text-center
+				.col-3.py-2.orderTop#selectHome-topBtn.bg-success
+					img(src="/imgs/index/deposit.png", width="43px", height="43px")
+				.col-3.pt-2.text-danger.orderTop#orderHome-topBtn 
+					h2#bsOrderAdd_arts 0
+				.col-3.py-2.orderTop#ordersHome-topBtn
+					img(src="/imgs/index/orders.png", width="43px", height="43px")
+				.col-3.py-2.orderTop#selfHome-topBtn
+					img(src="/imgs/niuale.png", width="43px", height="43px")
+		include ../../aaViews/aalayout/footer
+
+		script(src="/js/order/aaMain.js")
+		script(src="/js/order/bser.js")
+		script(src="/js/order/index.js")
+		script(src="/js/order/select.js")
+		script(src="/js/order/order.js")
+		script(src="/js/order/orderAdd.js")
+		script(src="/js/order/user.js")

@@ -1,0 +1,100 @@
+.row.my-3
+	.col-4
+		a.btn.btn-info(href="/bsPdfirs") <span class="oi oi-arrow-thick-left"></span>
+	.col-4.text-center
+		a.btn.btn-danger(href="/bsPdfirDel/"+pdfir._id) 删除
+	.col-4.text-right
+		button.btn.btn-warning#upBtn(type="button") <span class="oi oi-pencil"></span>
+table.table.table-bordered.my-3
+	tr
+		td 推荐
+		td
+			if pdfir.rcmd == 1
+				-a;
+				span.text-info 推荐
+			else
+				span.text-secondary 否
+	tr
+		td 编号
+		td #{pdfir.code}
+	tr
+		td 名称
+		td #{pdfir.nome}
+	tr
+		td 价格
+		td #{pdfir.price}
+	tr
+		td 进价
+		td #{pdfir.cost}
+	tr
+		td 库存
+		td #{pdfir.stock}
+	tr
+		td 销量
+		td #{pdfir.sales}
+	tr
+		td 创建时间
+		td #{moment(pdfir.ctAt).format("YYYY-MM-DD")}
+
+.row.mt-5
+	.col-12(align="center")
+		img.js-click-imgEnlarge.jsImg(src=pdfir.photo, width="100px")
+
+hr
+.row.postsPage
+	if pdfir.posts && pdfir.posts.length > 0
+		-a;
+		.col-12.text-right
+			a.btn.btn-danger(href="#", data-toggle="modal", data-target="#delPost") <span class="oi oi-trash"></span>
+		each post in pdfir.posts
+			-a;
+			.col-6.col-md-4.col-xl-2
+				img.js-click-imgEnlarge.jsImg(src=post.photo, width="100%", height="100px")
+		.col-6.col-md-4.col-xl-2
+			a(href="#", data-toggle="modal", data-target="#addPost")
+				img(src="/imgs/createPicture.jpg", width="100%", height="100px")
+	else
+		.col-6.col-md-4.col-xl-2
+			a(href="#", data-toggle="modal", data-target="#addPost")
+				img(src="/imgs/createPicture.jpg", width="100%", height="100px")
+
+	#delPost.modal.fade
+		.modal-dialog
+			.modal-content
+				.modal-header
+					h5 删除海报
+				.modal-body
+					if pdfir.posts
+						-a;
+						each post in pdfir.posts
+							-a;
+							.row.mt-5
+								.col-8
+									img(src=post.photo, width="60%")
+								.col-4.pt-5
+									a.btn.btn-danger(href="/bsPdfirPostDel/"+post._id+"?pdfir="+pdfir._id) 删除
+							hr
+				.modal-footer
+					.col-6
+						button.btn.btn-default(type="button" data-dismiss="modal") <span class="oi oi-x"></span>
+					.col-6.text-right
+#addPost.modal.fade
+	.modal-dialog
+		.modal-content
+			form#upGroup(method="post", action="/bsPdfirPostAdd", enctype="multipart/form-data")
+				.modal-header
+					h5 添加海报
+				.modal-body
+					input(type="hidden", name="pdfir", value=pdfir._id)
+					input(type="hidden", name="picName", value=pdfir.code)
+					input(type="hidden", name="photoDir", value='/pdImgs/')
+					.row
+						.col-12(align="center")
+							input#uploadPics.btn.btn-info.btn-block(type="file", name="uploadPics", multiple)
+					.form-group.row#crtImgs
+				.modal-footer
+					.col-6
+						button.btn.btn-default(type="button" data-dismiss="modal") <span class="oi oi-x"></span>
+					.col-6.text-right
+						button.btn.btn-success(type="submit") <span class="oi oi-location"></span>
+script(src="/js/bser/pdfir/postUpd.js")

@@ -1,0 +1,65 @@
+extends ../aalayout/layout
+
+block content
+	.container.mt-3
+		.row.mb-5
+			.col-6.col-lg-3.text-center.mt-3
+				a(href="/bsPdfirs")
+					img(src="/imgs/index/deposits.png", width="50px", height="50px")
+					//- span Upload Excel
+				a.btn.btn-default.btn-lg.btn-block.text-dark(href="/bsPdfirs") 模特库
+			.col-6.col-lg-3.text-center.mt-3
+				a(href="/bsCters")
+					div(style="height:10px")
+					img(src="/imgs/index/customer.png", width="50px", height="40px")
+				a.btn.btn-default.btn-lg.btn-block.text-dark(href="/bsCters") 客户
+			.col-6.col-lg-3.text-center.mt-3
+				a(href="/bsPdfirAdd")
+					div(style="height:10px")
+					img(src="/imgs/index/deposit.png", width="50px", height="50px")
+				a.btn.btn-default.btn-lg.btn-block.text-dark(href="/bsPdfirAdd") 进货
+			.col-6.col-lg-3.text-center.mt-3
+				a(href="/bsNomes")
+					div(style="height:10px")
+					img(src="/imgs/index/categ.png", width="50px", height="50px")
+				a.btn.btn-default.btn-lg.btn-block.text-dark(href="/bsNomes") 名称
+		hr
+		.row.mt-5
+			.col-6.col-lg-3.text-center.mt-3
+				a(href="/bsOrders")
+					img(src="/imgs/index/orders.png", width="50px", height="50px")
+					//- span Order List
+				a.btn.btn-default.btn-lg.btn-block.text-dark(href="/bsOrders") 销售记录
+			.col-6.col-lg-3.text-center.mt-3
+				a(href="/bsOrdersMonth")
+					img(src="/imgs/index/orders.png", width="50px", height="50px")
+					//- span Order List
+				a.btn.btn-default.btn-lg.btn-block.text-dark(href="/bsOrdersMonth") 月记录
+		hr
+		.row.mt-5
+			.col-6.col-lg-3.text-center.mt-3
+				a(href="/bsOrcs")
+					img(src="/imgs/index/orders.png", width="50px", height="50px")
+					//- span Order List
+				a.btn.btn-default.btn-lg.btn-block.text-dark(href="/bsOrcs") 订单
+			.col-6.col-lg-3.text-center.mt-3
+				a(href="/bsHisOrcs")
+					img(src="/imgs/index/orders.png", width="50px", height="50px")
+					//- span Order List
+				a.btn.btn-default.btn-lg.btn-block.text-dark(href="/bsHisOrcs") 历史订单
+		hr
+		.row.mt-5
+			.col-6.col-lg-3.text-center.mt-3
+				a(href="/bsColors" style="font-size: 40px;") <span class="oi oi-aperture"></span>
+				a.btn.btn-default.btn-lg.btn-block.text-dark(href="/bsColors") 颜色库
+			.col-6.col-lg-3.text-center.mt-3
+				a(href="/bsUsers")
+					img.rounded-circle(src="/imgs/index/staff.jpg", width="50px", height="50px")
+				a.btn.btn-default.btn-lg.btn-block.text-dark(href="/bsUsers") 成员
+			.col-6.col-lg-3.text-center.mt-3
+				a(href="/bsFirm")
+					img.rounded-circle(src="/imgs/index/office.jpg", width="50px", height="50px")
+				a.btn.btn-default.btn-lg.btn-block.text-dark(href="/bsFirm") 公司
+		.row.text-right.mt-5
+			.col-12
+				a.btn.btn-danger(href="/logout") 退出登录

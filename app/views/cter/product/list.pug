@@ -1,0 +1,20 @@
+extends ../aalayout/layout
+
+block content
+	.bigImgBox(style="display:none")
+
+	.container.containerPage
+		div(style="height: 100px")
+		.option.input-group
+			input.form-control.input-lg.pdfirSearch(type="text", placeholder="产品搜索", value=keyword)
+			.input-group-append
+				button.btn.btn-outline-secondary(type="button") <span class="oi oi-magnifying-glass"></span>
+		div(style="height: 100px")
+		.pdfirsList.bg-light.p-5
+			input#crCter(type="hidden", value=crCter)
+			input#pdfirFilterAjax(type="hidden", value="/usPdfirsAjax?@#pdfirsElem@ct")
+			//- input#pdfirFilterAjax(type="hidden", value="?key=xxx@#pdfirsElem")
+			#pdfirsElem
+		.js-browserHeight-autoFooter
+	script(src="/js/ajaxGet/pdfir.js")
+	script(src="/js/cter/pdfir/list.js")

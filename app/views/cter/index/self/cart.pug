@@ -1,0 +1,66 @@
+if orc && orc.orcpds && orc.orcpds.length > 0
+	-a;
+	h5.text-center #{orc.firm.nome} 购物车
+	.row
+		.col-6
+		.col-6.text-right: h5
+			span 总价: &nbsp;
+			span.text-info#impSpan #{orc.imp}
+			span.text-info &nbsp;€
+	hr
+	.orcpdBox
+		each orcpd in orc.orcpds
+			-a;
+			if orcpd.pdfir
+				- pdfir = orcpd.pdfir;
+				.row.mt-4.text-center(id="orcpd-"+orcpd._id)
+					.col-4.col-lg-2 
+						div #{pdfir.code} [#{pdfir.nome}]
+						.row
+							.col-6
+								span(id="quotSpan-"+orcpd._id) #{orcpd.quot} pz
+							.col-6
+								- let orcpdprice = parseFloat(orcpd.price * orcpd.quot);
+								if !isNaN(orcpdprice)
+									- orcpdprice = (orcpdprice).toFixed(2);
+									span.text-info(id="totSpan-"+orcpd._id) #{orcpdprice}
+									span &nbsp;€
+								else
+									span.text-danger Err €
+						div
+							img(src=pdfir.photo, width="100%", style="max-width:100px")
+						div
+							button.btn.btn-link.text-danger.orcpdDel(type="button", data-id=orcpd._id) 删除
+					.col-8.col-lg-10
+						table.table.table-bordered
+							tr
+								td
+								each size in orcpd.sizes
+									-a;
+									td #{size}
+							- let flag = 1;
+							each color in orcpd.colors
+								- let display = "";
+								if color.cquot == 0
+									- display = "none";
+									- flag = 0;
+								tr(style="display:"+display, class="trColor trColor-"+orcpd._id, id="trColor-"+color._id)
+									td(style="background-color:#"+color.colorcode, width="10%")
+										.colornome.bg-light #{color.colornome}
+									each size in color.sizes
+										- a;
+										td
+											input.iptsty2.quotIpt(type="number", data-id=orcpd._id, data-color=color.colorcode, data-size=size.size, value=size.quot)
+							if flag == 0
+								-a;
+								tr.trColorShow(style="display: block")
+									td
+										button.btn.btn-info.trColorShow(type="button", data-orcpd=orcpd._id) 显示
+
+	hr
+	.row
+		.col-12.text-right
+			button.btn.btn-success#orcSubBtn(type="button", data-id=orc._id) 确认订单
+else
+	h3.text-center 您的购物车是空的
+script(src="/js/cter/self/cart.js")

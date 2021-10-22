@@ -1,0 +1,22 @@
+extends ../aalayout/layout
+
+block content
+	p.mb-3.px-2.text-secondary.text-right 名称校对：[/bsNomeRevise]
+	table.table.table-hover
+		tr
+			th Nome
+			th status
+			//- th weight
+		each nome in nomes
+			-a;
+			tr
+				td #{nome.code}
+				td 
+					span.mr-3 #{nome.status}
+					if nome.status == 0
+						-a;
+						button.changeStatus.btn.btn-primary(type="button", data-id=nome._id, data-status=1) 显示
+					else
+						button.changeStatus.btn.btn-secondary(type="button", data-id=nome._id, data-status=0) 隐藏
+				//- td.text-right #{nome.weight}
+	script(src="/js/bser/nome/list.js")

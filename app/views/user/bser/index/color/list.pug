@@ -1,0 +1,20 @@
+extends ../../aalayout/layout
+
+block content
+	.container.mt-3
+		.row
+			.col-2
+				button#delBtn.btn.btn-danger(type="button") -
+			.col-8.text-center
+				h3 #{title}
+			.col-2.text-right
+				a.btn.btn-info(href="/bsColorAdd") +
+		.row.mt-4
+			each color in colors
+				-a;
+				.col-4.col-md-6.col-xl-1.mt-3.text-center(id="colorBox-"+color._id)
+					.color(style="background-color:#"+color.code+"; height: 30px")
+					.nome(style="Font-size: 8px") #{color.nome} &nbsp;
+					button.delBtn.btn.btn-danger(type="button", data-id=color._id, style="display:none") del
+
+	script(src="js/bser/color/list.js")

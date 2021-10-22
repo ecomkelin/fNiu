@@ -1,0 +1,17 @@
+extends ../aalayout/layout
+
+block content
+	.container.mt-3
+		table.table.table-hover.table-bordered
+			thead
+				tr
+					th 帐号
+					th 代号
+					th 角色
+			tbody
+				each user in users
+					-a;
+					tr(class="user-id-"+user._id)
+						td: a(href="/bsUser/"+user._id) #{user.code}
+						td #{user.cd}
+						td #{Conf.usRole[user.role]}

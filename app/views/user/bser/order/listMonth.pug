@@ -1,0 +1,30 @@
+extends ../aalayout/layout
+
+block content
+	div(style="height:50px")
+
+	.container
+		.months(style="display:none")
+		.month.mt-3
+	.topNav-second.p-1
+		.row.text-center
+			.col-4.pt-1
+				a.btn.btn-link(href='/bsOrders')
+					span.text-dark 销售记录
+			//- .col-4
+			//- 	input#selUserCode(type="hidden", value=selUserCode)
+			//- 	select#selUser.form-control(data-style="btn-info")
+			//- 		option(value=0) 全部
+			//- 		each user in users
+			//- 			-a;
+			//- 			if user.code == selUserCode
+			//- 				-a;
+			//- 				option(value=user.code selected="selected") #{user.code}
+			//- 			else
+			//- 				option(value=user.code) #{user.code}
+			.col-8
+				select#selMonth.form-control(data-style="btn-info")
+					each month in months
+						-a;
+						option(value=month.key+'-'+month.vals+'-'+month.valf) #{month.key}
+	script(src="/js/bser/order/selMonth.js")

@@ -1,0 +1,50 @@
+extends ../aalayout/layout
+
+block content
+	//- .noprint(style="height:59px")
+	#ajaxPds_page.page.container.mt-3(style="display:none")
+	#bsCters_page.page.container.mt-3
+
+		.row.my-3
+			.col-12.text-right
+				a.btn.btn-warning(href="/bsCterAdd") <span class="oi oi-plus"></span>
+			.col-12.my-4
+				form(method="get", action="/bsCters")
+					.form-group.row
+						.col-9
+							input.form-control(type="text",name="keyword")
+						.col-3
+							input.btn.btn-success.btn-block(type="submit" value="搜索")
+
+		- let i = 0;
+		each cter in cters
+			- i++;
+			.card.mt-3.p-2.bsCters_cter(id="bsCters_cter-"+cter._id)
+				.row
+					h5.col-6 #{cter.nome}
+
+					.col-6.text-right
+						- let vip = 0;
+						if cter.vip
+							- vip = cter.vip;
+							span VIP: #{vip}
+				.row.mt-2
+					.col-6 电话: #{cter.tel}
+	//- 	.bomNav-first.bg-info.js-scroll-DwShowUpHide(style="display:none")
+	//- 		.row.pt-2
+	//- 			.col-12
+	//- 				select#sortSelect.selectPd.custom-select.custom-select-md.mb-3
+	//- 					option(value='upAt_-1') 最近活跃
+	//- 					option(value='upAt_1') 不常活跃
+	//- 					option(value='ctAt_-1') 最新创建
+	//- 					option(value='ctAt_1') 最久创建
+	//- 					option(value='stock_-1') 次数最多
+	//- 					option(value='stock_1') 次数最少
+	//- 					option(value='sales_-1') 消费最多
+	//- 					option(value='sales_1') 消费最少
+	//- .topNav-second.bg-info#pdCodeNav.p-2
+	//- 	.row
+	//- 		.col-12
+	//- 			input#pdCodeAjax.form-control(type="text", autocomplete="off")
+
+	script(src="/js/bser/cter/cters.js")

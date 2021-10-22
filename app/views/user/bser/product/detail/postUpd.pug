@@ -1,0 +1,35 @@
+.row.my-3
+	.col-6
+		if pdfir.posts
+			-a;
+		if !pdfir.posts || pdfir.posts.length < 6
+			-a;
+			a.btn.btn-success(href="#", data-toggle="modal", data-target="#addPost") <span class="oi oi-plus"></span>
+
+#addPost.modal.fade
+	.modal-dialog
+		.modal-content
+			form#upGroup(method="post", action="/bsPdfirPostAdd", enctype="multipart/form-data")
+				.modal-header
+					h5 添加海报
+				.modal-body
+					input(type="hidden", name="pdfir", value=pdfir._id)
+					input(type="hidden", name="picName", value=pdfir.code)
+					input(type="hidden", name="photoDir", value='/pdImgs/')
+					.row
+						.col-12(align="center")
+							img#crtImgs.rounded-circle(src="/imgs/createPicture.jpg", width="200px")
+					.form-group.row.udPhoto(style="display:none")
+						label.col-4.col-form-label(for="uploadPhoto") PdImg
+						.col-8
+							input#uploadPhoto.btn.btn-info.btn-block(type="file", name="uploadPhoto", multiple)
+					.form-group.row
+						label.col-4.col-form-label 排序
+						.col-8
+							input.form-control(type="number", name="obj[weight]", autocomplete="off")
+				.modal-footer
+					.col-6
+						button.btn.btn-default(type="button" data-dismiss="modal") <span class="oi oi-x"></span>
+					.col-6.text-right
+						button.btn.btn-success(type="submit") <span class="oi oi-location"></span>
+

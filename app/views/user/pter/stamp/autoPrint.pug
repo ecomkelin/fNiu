@@ -1,0 +1,18 @@
+extends ../aalayout/layout
+
+block content
+	.container
+		.noprint
+			h1 打印纸型号: A5
+			input#stamping(type="hidden", value=order.stamping)
+			input#id(type="hidden", value=order._id)
+		.row.text-center
+			.col-sm-12
+				h2(style="font-size: 40px"): strong #{firm.nome}
+				h3 PREVENTIVO
+		hr
+		include ./selfA5Header
+		include ./selfA5Info
+	div(style="height: 200px")
+	span .
+	script(src="/js/pter/stamp.js")

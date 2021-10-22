@@ -1,0 +1,65 @@
+doctype
+html
+	head
+		title #{title}
+		include ../../../aaViews/aalayout/head
+	body
+		.noprint(style="height:70px")
+
+		input#Conf(type="hidden", value=Conf)
+		#bsOrder_page.page.container.mt-3(style="display:none")
+			
+		#bsOrders_page.page.container.mt-3
+			.noprint(style="height:60px")
+			.noprint.ordersFilter(style="height:50px; display: none")
+
+			#bsOrders_page_elem
+
+			.bomNav-first.bg-info
+				.row.pt-2
+					.col-6
+						select#userId.selectOrd.custom-select.custom-select-md.mb-3
+							option(value=-1) 全部成员
+							each user in users
+								-a;
+								option(value=user._id) #{user.cd}
+					.col-6
+						select#cterId.selectOrd.custom-select.custom-select-md.mb-3
+
+			.topNav-second.bg-info
+				.row.pt-2
+					.col-4
+						select#orderSts.selectOrd.custom-select.custom-select-md.mb-3
+							option(value=-1) 全部
+							option(value=0) 正常
+							option(value=10) 删除
+					.col-5
+						input#atFm.datepicker.form-control(type="text", placeholder='初始时间', readonly="readonly")
+					.col-3
+						button#ordersFilter_showBtn.btn.btn-default(type="button") <span class="oi oi-chevron-bottom"></span>
+				.row.p-2.bg-light.ordersFilter(style="display:none")
+					.col-4.pt-2.text-right 截至:
+					.col-5
+						input#atTo.datepicker.form-control(type="text", placeholder='结束时间', readonly="readonly")
+					.col-3
+						button#ordersFilter_hideBtn.btn.btn-default(type="button") <span class="oi oi-chevron-top"></span>
+
+
+		.topNav-first.bg-dark.p-2.noprint
+			.row
+				.col-3
+					a.navbar-brand.btn.btn-success(href="/bser") <span class="oi oi-home"></span>
+				.col-3
+				.col-3
+				.col-3
+		include ../../../aaViews/aalayout/footer
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		//- <link rel="stylesheet" href="/resources/demos/style.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		//- timepicker
+		link(rel="stylesheet", href="/libs/jt.timepicker/jquery.timepicker.css")
+		script(src="/libs/jt.timepicker/jquery.timepicker.min.js")
+
+		script(src="/js/bser/order/orders.js")
+		script(src="/js/bser/order/order.js")

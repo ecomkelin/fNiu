@@ -1,0 +1,30 @@
+extends ../../aalayout/layout
+
+block content
+	.container.mt-3
+		form.mt-3#bsProdNew(method="post", action="/bsColorNew", enctype="multipart/form-data")
+			.form-group.row
+				label.col-4.col-form-label(for="codeIpt") 编号
+				.col-8
+					input#codeIpt.form-control(type="text", name="obj[code]", autocomplete="off", placeholder="3或6位字符; 在0-9,A-F之间")
+				.col-4.mt-2
+				.col-8.mt-2
+					#showColorCard
+					span#optCode(style="display:none").text-danger
+			.form-group.row
+				label.col-4.col-form-label(for="nomeIpt") 名称
+				.col-8
+					input#nomeIpt.form-control(type="text", name="obj[nome]", autocomplete="off")
+				.col-12
+					.row#nomeShow
+			.form-group.row
+				label.col-4.col-form-label(for="weightIpt") 权重
+				.col-8
+					input#weightIpt.form-control(type="number", name="obj[weight]", autocomplete="off", value=1)
+			
+			hr
+			.form-group.row
+				.col-sm-6
+				.col-sm-6.col-12
+					input#btnSubmit.btn.btn-info.btn-block(type="submit" value='提交')
+	script(src="/js/bser/color/add.js")
